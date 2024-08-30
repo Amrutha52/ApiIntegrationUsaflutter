@@ -29,8 +29,16 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold(
+    final homeProvider = context.watch<HomeScreenController>();
 
+    return Scaffold(
+      body: ListView.separated(
+          itemBuilder: (context, index) => ListTile(
+            title: Text(homeProvider.dataResponseModel!.usDataList![index].year.toString()),
+            subtitle: Text(homeProvider.dataResponseModel!.usDataList![index].population.toString()),
+          ), 
+          separatorBuilder: (context, index) => SizedBox(height: 20,),
+          itemCount: homeProvider.dataResponseModel!.usDataList!.length ?? 0),
     );
   }
 }
